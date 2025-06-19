@@ -6,6 +6,15 @@ pipeline {
   }
 
   stages {
+    stage('Manual Git Checkout') {
+      steps {
+        deleteDir() // Clean workspace
+        git branch: 'main',
+            url: 'https://github.com/issarbhavya/hello-k8s-app.git'
+        echo "✅ Repo cloned manually."
+      }
+    }
+
     stage('Build') {
       steps {
         echo "🔨 Building Docker image..."
@@ -30,4 +39,3 @@ pipeline {
     }
   }
 }
-
